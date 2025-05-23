@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
+
+namespace TmxReadAndWrite.Models;
+
+public class TileAnimation
+{
+    [XmlElement("frame")]
+    public List<TileAnimationFrame> Frames
+    {
+        get;
+        set;
+    }
+
+    public TileAnimation()
+    {
+        Frames = new List<TileAnimationFrame>();
+    }
+}

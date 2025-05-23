@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmxReadAndWrite", "TmxReadAndWrite\TmxReadAndWrite.csproj", "{E4BA7B41-453A-4FC5-B198-23B87AA18F95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmxCLI", "TmxCLI\TmxCLI.csproj", "{F3A5ACB0-9211-4974-BB55-8B2BD9A68CC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{B371CA3E-623D-4306-96E6-F96980493B76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F3A5ACB0-9211-4974-BB55-8B2BD9A68CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A5ACB0-9211-4974-BB55-8B2BD9A68CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A5ACB0-9211-4974-BB55-8B2BD9A68CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B371CA3E-623D-4306-96E6-F96980493B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B371CA3E-623D-4306-96E6-F96980493B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B371CA3E-623D-4306-96E6-F96980493B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B371CA3E-623D-4306-96E6-F96980493B76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

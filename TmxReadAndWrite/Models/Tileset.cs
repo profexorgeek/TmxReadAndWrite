@@ -133,7 +133,7 @@ public class Tileset
     }
 
     [XmlElement("tile")]
-    public List<mapTilesetTile> Tiles = new List<mapTilesetTile>();
+    public List<TilesetTile> Tiles = new List<TilesetTile>();
     public bool ShouldSerializeTiles()
     {
         return string.IsNullOrEmpty(this.Source);
@@ -162,14 +162,14 @@ public class Tileset
     }
 
 
-    private IDictionary<uint, mapTilesetTile> _tileDictionaryField;
+    private IDictionary<uint, TilesetTile> _tileDictionaryField;
 
     /// <summary>
     /// Dictionary containing the tiles where the key is the tile.id. This makes searching
     /// for tiles by id faster than a .Where call.
     /// </summary>
     [XmlIgnore]
-    public IDictionary<uint, mapTilesetTile> TileDictionary
+    public IDictionary<uint, TilesetTile> TileDictionary
     {
         get
         {
@@ -177,7 +177,7 @@ public class Tileset
             {
                 if (_tileDictionaryField == null)
                 {
-                    _tileDictionaryField = new ConcurrentDictionary<uint, mapTilesetTile>();
+                    _tileDictionaryField = new ConcurrentDictionary<uint, TilesetTile>();
 
                     if (Tiles != null)
                     {
@@ -197,7 +197,7 @@ public class Tileset
                             // it was hardcoded to be the ID of the tile including the offset?
                             // for multiple tilesets the offset won't be 1...
                             //uint key = (uint)t.id + 1;
-                            uint key = (uint)t.id;
+                            uint key = (uint)t.Id;
                             if (!_tileDictionaryField.ContainsKey(key))
                             {
                                 _tileDictionaryField.Add(key, t);
@@ -345,8 +345,8 @@ public class Tileset
                     this.Images[count] = new TilesetImage
                     {
                         Source = xts.image[count].source,
-                        height = xts.image[count].height != 0 ? xts.image[count].height : xts.tileheight,
-                        width = xts.image[count].width != 0 ? xts.image[count].width : xts.tilewidth
+                        Height = xts.image[count].height != 0 ? xts.image[count].height : xts.tileheight,
+                        Width = xts.image[count].width != 0 ? xts.image[count].width : xts.tilewidth
                     };
                 });
             }
@@ -378,6 +378,14 @@ public class Tileset
 
         return toReturn;
     }
+
+    public string Serialize()
+    {
+        FileManager.XmlSerialize(typeof(Tileset), this, out string serialized);
+
+        return serialized;
+    }
+
 }
 
 

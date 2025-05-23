@@ -96,7 +96,7 @@ public partial class TiledMapSave
 
     [XmlElement("layer", typeof(MapLayer))]
     [XmlElement("imagelayer", typeof(MapImageLayer))]
-    [XmlElement("objectgroup", typeof(mapObjectgroup))]
+    [XmlElement("objectgroup", typeof(ObjectGroup))]
     public List<AbstractMapLayer> MapLayers { get; set; }
 
     [XmlElement("group")]
@@ -110,7 +110,7 @@ public partial class TiledMapSave
 
     /// <remarks/>
     [XmlIgnore]
-    public IReadOnlyList<mapObjectgroup> Objectgroup => MapLayers.OfType<mapObjectgroup>().ToList();
+    public IReadOnlyList<ObjectGroup> Objectgroup => MapLayers.OfType<ObjectGroup>().ToList();
 
     [XmlIgnore]
     public IReadOnlyList<MapImageLayer> ImageLayers => MapLayers.OfType<MapImageLayer>().ToList();
@@ -251,7 +251,7 @@ public class LayerGroup
 
     [XmlElement("layer", typeof(MapLayer))]
     [XmlElement("imagelayer", typeof(MapImageLayer))]
-    [XmlElement("objectgroup", typeof(mapObjectgroup))]
+    [XmlElement("objectgroup", typeof(ObjectGroup))]
     public List<AbstractMapLayer> MapLayers { get; set; }
 
     [XmlElement("group")]
@@ -449,7 +449,7 @@ public partial class TilesetImage
     }
 
     [XmlIgnore]
-    public string sourceFileName
+    public string SourceFileName
     {
         get
         {
@@ -465,7 +465,7 @@ public partial class TilesetImage
     }
 
     [XmlIgnore]
-    public string sourceDirectory
+    public string SourceDirectory
     {
         get
         {
@@ -483,7 +483,7 @@ public partial class TilesetImage
 
     /// <remarks/>
     [XmlAttribute("width")]
-    public int width
+    public int Width
     {
         get;
         set;
@@ -491,7 +491,7 @@ public partial class TilesetImage
 
     /// <remarks/>
     [XmlAttribute("height")]
-    public int height
+    public int Height
     {
         get;
         set;
@@ -512,8 +512,8 @@ public partial class mapTilesetTileOffset
     private int yField;
 
     /// <remarks/>
-    [XmlAttribute()]
-    public int x
+    [XmlAttribute("x")]
+    public int X
     {
         get
         {
@@ -526,8 +526,8 @@ public partial class mapTilesetTileOffset
     }
 
     /// <remarks/>
-    [XmlAttribute()]
-    public int y
+    [XmlAttribute("y")]
+    public int Y
     {
         get
         {
@@ -762,7 +762,7 @@ public partial class MapLayerData
 }
 
 [Serializable]
-public partial class mapObjectgroup : AbstractMapLayer
+public partial class ObjectGroup : AbstractMapLayer
 {
     private mapObjectgroupObject[] objectField;
 

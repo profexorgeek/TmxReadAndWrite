@@ -6,7 +6,7 @@ namespace TmxReadAndWrite.Models
     [Serializable]
     [XmlInclude(typeof (MapLayer))]
     [XmlInclude(typeof  (MapImageLayer))]
-    [XmlInclude(typeof (mapObjectgroup))]
+    [XmlInclude(typeof (ObjectGroup))]
     public abstract class AbstractMapLayer
     {
         private float _offsetX;

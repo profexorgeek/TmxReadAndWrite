@@ -25,8 +25,8 @@ public static class TilesetExtensionMethods
             // supportthat yet.
             var image = tileset.Images[0];
 
-            int effectiveImageWidth = tileset.Images[0].width;
-            int effectiveImageHeight = tileset.Images[0].height;
+            int effectiveImageWidth = tileset.Images[0].Width;
+            int effectiveImageHeight = tileset.Images[0].Height;
 
             if (xCoordinate < effectiveImageWidth && yCoordinate < effectiveImageHeight)
             {
@@ -61,10 +61,10 @@ public static class TilesetExtensionMethods
             // This is the width of the image as reported by the .tsx or .tmx, but
             // it may not actually be the image's width if the .png has changed since
             // the tsx/tmx was saved
-            int imageWidth = tileset.Images[0].width;
+            int imageWidth = tileset.Images[0].Width;
 
             return GetNumberOfTilesWide(
-                tileset.Images[0].width, tileset.Margin, tileset.TileWidth, tileset.Spacing);
+                tileset.Images[0].Width, tileset.Margin, tileset.TileWidth, tileset.Spacing);
         }
     }
 
@@ -149,7 +149,7 @@ public static class TilesetExtensionMethods
         else
         {
             return GetNumberOfTilesWide(
-                tileset.Images[0].height, tileset.Margin, tileset.TileHeight, tileset.Spacing);
+                tileset.Images[0].Height, tileset.Margin, tileset.TileHeight, tileset.Spacing);
         }
     }
 

@@ -22,6 +22,8 @@ public class TiledMapSaveTests
         serialized.Contains("width=\"64\"").ShouldBeTrue();
         serialized.Contains("tilewidth=\"12\"").ShouldBeTrue();
         serialized.Contains("tileheight=\"16\"").ShouldBeTrue();
+
+
     }
 
     [Fact]
@@ -65,5 +67,25 @@ public class TiledMapSaveTests
 
         serialized.Contains("length=\"4096\"").ShouldBeTrue();
 
+    }
+
+    [Fact]
+    public void Serialize_ShouldSaveTileset()
+    {
+        var tiledMapSave = new TiledMapSave();
+
+        Tileset.ShouldLoadValuesFromSource = false;
+        var tileset = new Tileset
+        {
+            Source = "test.tsx",
+            FirstGid = 1
+        };
+
+        tiledMapSave.Tilesets.Add(tileset);
+
+        var serialized = tiledMapSave.Serialize();
+
+        serialized.Contains("source=\"test.tsx\"").ShouldBeTrue();
+        serialized.Contains("firstgid=\"1\"").ShouldBeTrue();
     }
 }

@@ -8,7 +8,7 @@ namespace TmxReadAndWrite.Models;
 
 
 [XmlType(AnonymousType = true)]
-public partial class mapTilesetTile
+public partial class TilesetTile
 {
     private IDictionary<string, string> propertyDictionaryField = null;
 
@@ -45,8 +45,8 @@ public partial class mapTilesetTile
 
     // Vic asks - shouldn't this be a uint?
     /// <remarks/>
-    [XmlAttribute()]
-    public int id
+    [XmlAttribute("id")]
+    public int Id
     {
         get;
         set;
@@ -72,7 +72,7 @@ public partial class mapTilesetTile
     }
 
     [XmlElement("objectgroup")]
-    public mapObjectgroup Objects { get; set; }
+    public ObjectGroup Objects { get; set; }
 
     [XmlAttribute("probability")]
     public double Probability
@@ -81,14 +81,14 @@ public partial class mapTilesetTile
         set;
     } = 1;
 
-    public mapTilesetTile()
+    public TilesetTile()
         {
         }
 
 
     public override string ToString()
     {
-        string toReturn = id.ToString();
+        string toReturn = Id.ToString();
 
         if(!string.IsNullOrEmpty(Type))
         {

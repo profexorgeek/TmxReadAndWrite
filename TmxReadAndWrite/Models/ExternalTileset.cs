@@ -35,7 +35,7 @@ public partial class tileset
     
     private int marginField;
     [System.Xml.Serialization.XmlElementAttribute("tile", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public List<mapTilesetTile> tile = new List<mapTilesetTile>();
+    public List<TilesetTile> tile = new List<TilesetTile>();
     //{
     //    get
     //    {

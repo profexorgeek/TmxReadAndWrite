@@ -68,7 +68,7 @@ public partial class TiledMapSave
 
             foreach (var tile in tilesWithTypes)
             {
-                var dictionaryEntry = tileset.TileDictionary[(uint)tile.id];
+                var dictionaryEntry = tileset.TileDictionary[(uint)tile.Id];
 
                 dictionaryEntry.properties.Add(new property { name = "Type", value = tile.Type });
             }
@@ -230,11 +230,11 @@ public partial class TiledMapSave
 
             if (tileSet.Tiles != null)
             {
-                Func<mapTilesetTile, bool> predicate =
+                Func<TilesetTile, bool> predicate =
                     t => t.PropertyDictionary.Count > 0 ||
                     (t.Animation != null && t.Animation.Frames != null && t.Animation.Frames.Count > 0);
 
-                foreach (mapTilesetTile tile in tileSet.Tiles.Where(predicate))
+                foreach (TilesetTile tile in tileSet.Tiles.Where(predicate))
                 {
                     Dictionary<string, string> propertyDictionary = new Dictionary<string, string>(tile.PropertyDictionary);
 
@@ -243,7 +243,7 @@ public partial class TiledMapSave
 
                     if (needsName && propertyDictionary.Keys.Any(item => property.GetStrippedName(item).ToLowerInvariant() == "name") == false)
                     {
-                        var globalId = tile.id + tileSet.FirstGid;
+                        var globalId = tile.Id + tileSet.FirstGid;
                         // This has properties, but no name, so let's give it a name!
                         propertyDictionary.Add("Name (required, string)", "Unnamed" + globalId);
                     }
@@ -675,8 +675,8 @@ public partial class TiledMapSave
     public static void GetPixelCoordinatesFromGid(uint gid, Tileset tileSet,
         out int leftPixelCoord, out int topPixelCoord, out int rightPixelCoord, out int bottomPixelCoord)
     {
-        int imageWidth = tileSet.Images[0].width;
-        int imageHeight = tileSet.Images[0].height;
+        int imageWidth = tileSet.Images[0].Width;
+        int imageHeight = tileSet.Images[0].Height;
         int tileWidth = tileSet.TileWidth;
         int spacing = tileSet.Spacing;
         int tileHeight = tileSet.TileHeight;

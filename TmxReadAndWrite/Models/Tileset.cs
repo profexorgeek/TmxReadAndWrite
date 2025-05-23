@@ -125,7 +125,7 @@ public class Tileset
 
 
     [XmlArray("terraintypes")]
-    public List<mapTilesetTerrain> terraintypes = new List<mapTilesetTerrain>();
+    public List<TilesetTerrain> Terraintypes = new List<TilesetTerrain>();
 
     public bool ShouldSerializeterraintypes()
     {
@@ -221,7 +221,7 @@ public class Tileset
 
     /// <remarks/>
     [XmlAttribute("firstgid")]
-    public uint Firstgid
+    public uint FirstGid
     {
         get;
         set;
@@ -242,7 +242,7 @@ public class Tileset
 
     /// <remarks/>
     [XmlAttribute("tilewidth")]
-    public int Tilewidth
+    public int TileWidth
     {
         get;
         set;
@@ -255,7 +255,7 @@ public class Tileset
 
     /// <remarks/>
     [XmlAttribute("tileheight")]
-    public int Tileheight
+    public int TileHeight
     {
         get;
         set;
@@ -292,7 +292,8 @@ public class Tileset
         return string.IsNullOrEmpty(this.Source);
     }
 
-    public List<wangset> wangsets { get; set; } = new List<wangset>();
+    [XmlArray("wangsets")]
+    public List<wangset> Wangsets { get; set; } = new List<wangset>();
 
 
     #endregion
@@ -352,8 +353,8 @@ public class Tileset
             this.Name = xts.name;
             this.Margin = xts.margin;
             this.Spacing = xts.spacing;
-            this.Tileheight = xts.tileheight;
-            this.Tilewidth = xts.tilewidth;
+            this.TileHeight = xts.tileheight;
+            this.TileWidth = xts.tilewidth;
             this.Tiles = xts.tile;
 
             this.Version = xts.Version;
@@ -361,7 +362,7 @@ public class Tileset
             this.Columns = xts.Columns;
             this.TileCount = xts.TileCount;
 
-            this.wangsets = xts.wangsets;
+            this.Wangsets = xts.wangsets;
         }
     }
 
@@ -381,8 +382,10 @@ public class Tileset
 
 
 
-public class mapTilesetTerrain
+public class TilesetTerrain
 {
-    public string name { get; set; }
-    public int tile { get; set; }
+    [XmlElement("name")]
+    public string Name { get; set; }
+    [XmlElement("tile")]
+    public int Tile { get; set; }
 }

@@ -9,8 +9,8 @@ public static class TilesetExtensionMethods
 {
     public static void IndexToCoordinate(this Tileset tileset, long xIndex, long yIndex, out int xCoordinate, out int yCoordinate)
     {
-        xCoordinate = tileset.Margin + (int)xIndex * (tileset.Tilewidth + tileset.Spacing);
-        yCoordinate = tileset.Margin + (int)yIndex * (tileset.Tileheight + tileset.Spacing);
+        xCoordinate = tileset.Margin + (int)xIndex * (tileset.TileWidth + tileset.Spacing);
+        yCoordinate = tileset.Margin + (int)yIndex * (tileset.TileHeight + tileset.Spacing);
 
 
     }
@@ -39,8 +39,8 @@ public static class TilesetExtensionMethods
                 }
 
 
-                int effectiveTileWidth = tileset.Tilewidth + tileset.Spacing;
-                int effectiveTileHeight = tileset.Tileheight + tileset.Spacing;
+                int effectiveTileWidth = tileset.TileWidth + tileset.Spacing;
+                int effectiveTileHeight = tileset.TileHeight + tileset.Spacing;
 
                 xIndex = xCoordinate / effectiveTileWidth;
                 yIndex = yCoordinate / effectiveTileHeight;
@@ -52,7 +52,7 @@ public static class TilesetExtensionMethods
 
     public static int GetNumberOfTilesWide(this Tileset tileset)
     {
-        if (tileset.Images.Length == 0 || tileset.Tilewidth == 0)
+        if (tileset.Images.Length == 0 || tileset.TileWidth == 0)
         {
             return 0;
         }
@@ -64,7 +64,7 @@ public static class TilesetExtensionMethods
             int imageWidth = tileset.Images[0].width;
 
             return GetNumberOfTilesWide(
-                tileset.Images[0].width, tileset.Margin, tileset.Tilewidth, tileset.Spacing);
+                tileset.Images[0].width, tileset.Margin, tileset.TileWidth, tileset.Spacing);
         }
     }
 
@@ -149,7 +149,7 @@ public static class TilesetExtensionMethods
         else
         {
             return GetNumberOfTilesWide(
-                tileset.Images[0].height, tileset.Margin, tileset.Tileheight, tileset.Spacing);
+                tileset.Images[0].height, tileset.Margin, tileset.TileHeight, tileset.Spacing);
         }
     }
 

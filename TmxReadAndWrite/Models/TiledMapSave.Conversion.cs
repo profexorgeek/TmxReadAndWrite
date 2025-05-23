@@ -90,9 +90,9 @@ public partial class TiledMapSave
                     {
                         var tileset = GetTilesetForGid(item.gid.Value);
 
-                        if (tileset.TileDictionary.ContainsKey(item.gid.Value - tileset.Firstgid))
+                        if (tileset.TileDictionary.ContainsKey(item.gid.Value - tileset.FirstGid))
                         {
-                            var properties = tileset.TileDictionary[item.gid.Value - tileset.Firstgid];
+                            var properties = tileset.TileDictionary[item.gid.Value - tileset.FirstGid];
                             if (!string.IsNullOrEmpty(properties.Type))
                             {
                                 if(item.PropertyDictionary.ContainsKey("Type")) {
@@ -243,7 +243,7 @@ public partial class TiledMapSave
 
                     if (needsName && propertyDictionary.Keys.Any(item => property.GetStrippedName(item).ToLowerInvariant() == "name") == false)
                     {
-                        var globalId = tile.id + tileSet.Firstgid;
+                        var globalId = tile.id + tileSet.FirstGid;
                         // This has properties, but no name, so let's give it a name!
                         propertyDictionary.Add("Name (required, string)", "Unnamed" + globalId);
                     }
@@ -277,7 +277,7 @@ public partial class TiledMapSave
             return;
         }
         ////////////////// End early out ////////////////////
-        uint startGid = Tilesets[tilesetIndex].Firstgid;
+        uint startGid = Tilesets[tilesetIndex].FirstGid;
 
         string nameValue = GetNameValue(iDictionary);
 
@@ -291,7 +291,7 @@ public partial class TiledMapSave
         uint endIdExclusive = uint.MaxValue;
         if (tilesetIndex < Tilesets.Count - 1)
         {
-            endIdExclusive = Tilesets[tilesetIndex + 1].Firstgid;
+            endIdExclusive = Tilesets[tilesetIndex + 1].FirstGid;
         }
 
 
@@ -299,9 +299,9 @@ public partial class TiledMapSave
         {
             var layer = Layers[i];
             // see if any layers reference this tile:
-            foreach (var data in layer.data)
+            foreach (var data in layer.Data)
             {
-                foreach (var tile in data.tiles)
+                foreach (var tile in data.Tiles)
                 {
                     if (tile >= startGid && tile < endIdExclusive)
                     {
@@ -372,7 +372,7 @@ public partial class TiledMapSave
             // is relative to the Tileset.  I didn't try
             // this with multiple tilesets, and the first
             // tileset has a starting ID of 1. 
-            frameId += this.Tilesets[tilesetIndex].Firstgid;
+            frameId += this.Tilesets[tilesetIndex].FirstGid;
 
             GetPixelCoordinatesFromGid(frameId, this.Tilesets[tilesetIndex],
                 out leftCoordinate, out topCoordinate, out rightCoordinate, out bottomCoordinate);
@@ -677,9 +677,9 @@ public partial class TiledMapSave
     {
         int imageWidth = tileSet.Images[0].width;
         int imageHeight = tileSet.Images[0].height;
-        int tileWidth = tileSet.Tilewidth;
+        int tileWidth = tileSet.TileWidth;
         int spacing = tileSet.Spacing;
-        int tileHeight = tileSet.Tileheight;
+        int tileHeight = tileSet.TileHeight;
         int margin = tileSet.Margin;
 
 
@@ -689,8 +689,8 @@ public partial class TiledMapSave
         GetFlipBoolsFromGid(gid, out flipHorizontally, out flipVertically, out flipDiagonally);
 
         // Calculate pixel coordinates in the texture sheet
-        leftPixelCoord = CalculateXCoordinate(gidWithoutRotation - tileSet.Firstgid, imageWidth, tileWidth, spacing, margin);
-        topPixelCoord = CalculateYCoordinate(gidWithoutRotation - tileSet.Firstgid, imageWidth, tileWidth, tileHeight, spacing, margin);
+        leftPixelCoord = CalculateXCoordinate(gidWithoutRotation - tileSet.FirstGid, imageWidth, tileWidth, spacing, margin);
+        topPixelCoord = CalculateYCoordinate(gidWithoutRotation - tileSet.FirstGid, imageWidth, tileWidth, tileHeight, spacing, margin);
         rightPixelCoord = leftPixelCoord + tileWidth;
         bottomPixelCoord = topPixelCoord + tileHeight;
 
@@ -739,7 +739,7 @@ public partial class TiledMapSave
             for (int i = Tilesets.Count - 1; i >= 0; --i)
             {
                 Tileset tileSet = Tilesets[i];
-                if (effectiveGid >= tileSet.Firstgid)
+                if (effectiveGid >= tileSet.FirstGid)
                 {
                     return tileSet;
                 }
@@ -844,7 +844,7 @@ public partial class TiledMapSave
         return tms;
     }
 
-    public string Serialize(string fileName)
+    public string Serialize()
     {
         FileManager.XmlSerialize(typeof(TiledMapSave), this, out string serialized);
 

@@ -9,8 +9,6 @@ namespace TmxReadAndWrite.Models;
 [Serializable]
 public partial class MapLayer : AbstractMapLayer
 {
-    #region Fields
-
     private IDictionary<string, string> propertyDictionaryField = null;
 
 
@@ -26,12 +24,11 @@ public partial class MapLayer : AbstractMapLayer
     }
 
 
-    private mapLayerData[] dataField;
+    private MapLayerData[] dataField;
 
     private int widthField;
 
     private int heightField;
-    #endregion
 
     [XmlIgnore]
     public IDictionary<string, string> PropertyDictionary
@@ -55,7 +52,7 @@ public partial class MapLayer : AbstractMapLayer
 
     /// <remarks/>
     [XmlElement("data", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true)]
-    public mapLayerData[] data
+    public MapLayerData[] Data
     {
         get
         {
@@ -66,9 +63,9 @@ public partial class MapLayer : AbstractMapLayer
             this.dataField = value;
             if (dataField != null)
             {
-                foreach (mapLayerData layerData in dataField)
+                foreach (MapLayerData layerData in dataField)
                 {
-                    layerData.length = width * height;
+                    layerData.Length = Width * Height;
                 }
             }
         }
@@ -76,7 +73,7 @@ public partial class MapLayer : AbstractMapLayer
 
     /// <remarks/>
     [XmlAttribute("width")]
-    public int width
+    public int Width
     {
         get
         {
@@ -85,11 +82,11 @@ public partial class MapLayer : AbstractMapLayer
         set
         {
             this.widthField = value;
-            if (this.data != null)
+            if (this.Data != null)
             {
-                foreach (mapLayerData layerData in data)
+                foreach (MapLayerData layerData in Data)
                 {
-                    layerData.length = width * height;
+                    layerData.Length = Width * Height;
                 }
             }
         }
@@ -97,7 +94,7 @@ public partial class MapLayer : AbstractMapLayer
 
     /// <remarks/>
     [XmlAttribute("height")]
-    public int height
+    public int Height
     {
         get
         {
@@ -106,11 +103,11 @@ public partial class MapLayer : AbstractMapLayer
         set
         {
             this.heightField = value;
-            if (this.data != null)
+            if (this.Data != null)
             {
-                foreach (mapLayerData layerData in data)
+                foreach (MapLayerData layerData in Data)
                 {
-                    layerData.length = width * height;
+                    layerData.Length = Width * Height;
                 }
             }
         }

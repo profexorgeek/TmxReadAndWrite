@@ -106,14 +106,14 @@ public partial class TiledMapSave
 
 
     [XmlIgnore]
-    public List<MapLayer> Layers => MapLayers.OfType<MapLayer>().ToList();
+    public IReadOnlyList<MapLayer> Layers => MapLayers.OfType<MapLayer>().ToList();
 
     /// <remarks/>
     [XmlIgnore]
-    public List<mapObjectgroup> Objectgroup => MapLayers.OfType<mapObjectgroup>().ToList();
+    public IReadOnlyList<mapObjectgroup> Objectgroup => MapLayers.OfType<mapObjectgroup>().ToList();
 
     [XmlIgnore]
-    public List<MapImageLayer> ImageLayers => MapLayers.OfType<MapImageLayer>().ToList();
+    public IReadOnlyList<MapImageLayer> ImageLayers => MapLayers.OfType<MapImageLayer>().ToList();
 
     /// <remarks/>
     [XmlAttribute("version")]
@@ -554,7 +554,7 @@ public partial class mapLayerDataTile
 
 /// <remarks/>
 [XmlType(AnonymousType = true)]
-public partial class mapLayerData
+public partial class MapLayerData
 {
 
     private string encodingField;
@@ -564,16 +564,16 @@ public partial class mapLayerData
     private string valueField;
 
     /// <remarks/>
-    [XmlAttribute()]
-    public string encoding
+    [XmlAttribute("encoding")]
+    public string Encoding
     {
         get => encodingField;
         set => encodingField = value;
     }
 
     /// <remarks/>
-    [XmlAttribute()]
-    public string compression
+    [XmlAttribute("compression")]
+    public string Compression
     {
         get
         {
@@ -611,7 +611,7 @@ public partial class mapLayerData
     /// next row.
     /// </summary>
     [XmlIgnore]
-    public uint[] tiles
+    public uint[] Tiles
     {
         get
         {
@@ -624,13 +624,13 @@ public partial class mapLayerData
             {
                 if (encodingField != null && encodingField != "csv")
                 {
-                    _ids = new uint[length];
+                    _ids = new uint[Length];
                     // get a stream to the decoded Base64 text
 
                     var trimmedValue = Value.Trim();
 
                     Stream data = new MemoryStream(Convert.FromBase64String(trimmedValue), false);
-                    switch (compression)
+                    switch (Compression)
                     {
                         case "gzip":
                             data = new GZipStream(data, CompressionMode.Decompress, false);
@@ -646,7 +646,7 @@ public partial class mapLayerData
                             // Not compressed. Data is already decoded.
                             break;
                         default:
-                            throw new InvalidOperationException("Unknown compression: " + compression);
+                            throw new InvalidOperationException("Unknown compression: " + Compression);
                     }
 
                     // simply read in all the integers
@@ -654,8 +654,8 @@ public partial class mapLayerData
                     {
                         using (BinaryReader reader = new BinaryReader(data))
                         {
-                            var byteArray = reader.ReadBytes(4 * length);
-                            Buffer.BlockCopy(byteArray, 0, _ids, 0, length * 4);
+                            var byteArray = reader.ReadBytes(4 * Length);
+                            Buffer.BlockCopy(byteArray, 0, _ids, 0, Length * 4);
                         }
 
 
@@ -706,12 +706,14 @@ public partial class mapLayerData
 
     }
 
-    public int length { get; set; }
+    [XmlAttribute("length")]
+    public int Length { get; set; }
 
     public void SetTileData(uint[] newData, string encoding, string compression)
     {
-        this.encoding = encoding;
-        this.compression = compression;
+        Length = newData.Length;
+        this.Encoding = encoding;
+        this.Compression = compression;
 
         if (encodingField != "csv")
         {
@@ -722,6 +724,7 @@ public partial class mapLayerData
                         CompressGzip(newData);
 
                     this.Value = "\n   " + convertedString + "\n";
+
 
                 }
             }

@@ -31,7 +31,7 @@ namespace TmxReadAndWrite.Models
 
         private int? visibleField;
         [XmlAttribute("visible")]
-        public int visible
+        public int Visible
         {
             get
             {
@@ -43,7 +43,24 @@ namespace TmxReadAndWrite.Models
             }
         }
 
-        public bool IsVisible => visibleField == null || visibleField == 1;
+        public bool IsVisible
+        {
+            get
+            {
+                return visibleField == null || visibleField == 1;
+            }
+            set
+            {
+                if (value)
+                {
+                    visibleField = 1;
+                }
+                else
+                {
+                    visibleField = 0;
+                }
+            }
+        }
 
         private float? parallaxxField;
         [XmlAttribute("parallaxx")]
